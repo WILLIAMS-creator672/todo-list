@@ -10,7 +10,7 @@ const showMenuButton = document.getElementById('showMenuButton')
 seeTaskButton.addEventListener('click', () => {
     setTimeout(() => {
 
-        taskSection.classList.remove('-translate-y-[1000px]')
+        taskSection.classList.remove('translate-x-[1000px]')
 
     }, 100);
 
@@ -35,7 +35,7 @@ gobackButton.addEventListener('click', () => {
     taskSection.classList.add('opacity-0')
 
     setTimeout(() => {
-        taskSection.classList.add('-translate-y-[1000px]')
+        taskSection.classList.add('translate-x-[1000px]')
     }, 150);
 })
 
