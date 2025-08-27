@@ -1,0 +1,43 @@
+* {
+    transition: all 0.3s;
+}
+
+.padding {
+    padding: 20px 5vw
+}
+
+.center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image-fade {}
+
+.taskSection {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    /* border: 2px solid red; */
+    z-index: 40;
+    background-color: white;
+}
+
+aside {
+    /* background-color: red; */
+}
+
+aside button {
+    /* background-color: #84CC16; */
+    padding: px;
+    color: white;
+    cursor: pointer;
+
+}
+
+aside button:hover{
+    background-color: #84CC16;
+}
