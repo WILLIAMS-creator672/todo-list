@@ -32,7 +32,7 @@ seeTaskButton.addEventListener('click', () => {
 })
 
 gobackButton.addEventListener('click', () => {
-    taskSection.classList.add('opacity-0')
+    taskSection.classList.add('opaciy-0')
 
     setTimeout(() => {
         taskSection.classList.add('translate-x-[1000px]')
