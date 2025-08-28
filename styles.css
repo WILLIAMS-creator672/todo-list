@@ -38,6 +38,56 @@ aside button {
 
 }
 
-aside button:hover{
+aside button:hover {
     background-color: #84CC16;
+}
+
+
+#addTaskModal {
+    display: flex;
+    flex-flow: column;
+    /* gap: 50px; */
+    box-shadow: 2px 2px 4px #84CC16, -2px -2px 4px #84CC16;
+    border-radius: 10px;
+    z-index: 50;
+    background-color: whitesmoke;
+}
+
+#addTaskModal input {
+    border: 1px solid #737373;
+    border-radius: 5px;
+    outline: none;
+}
+
+#addTaskModal input:focus {
+    border: 1px solid #84CC16;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    /* border: 2px solid red; */
+    z-index: 40;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#successMessage {
+    box-shadow: 2px 2px 4px #84CC16, -2px -2px 4px #84CC16;
+    width: fit-content;
+    border-radius: 10px;
+    color: #84CC16;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#errorMessage {
+    box-shadow: 2px 2px 4px red, -2px -2px 4px red;
+    width: fit-content;
+    border-radius: 10px;
+    color: red;
+    padding: 10px;
+    font-weight: bold;
 }

@@ -16,7 +16,7 @@
 
     <!-- HEADER -->
 
-    <header class="padding flex justify-between">
+    <header class="padding flex justify-between sticky top-0">
         <button id="showMenuButton" class="cursor-pointer text-[25px] text-neutral-500 hover:scale-110">
             <i class="fa-solid fa-bars"></i>
         </button>
@@ -29,7 +29,7 @@
     <main class="pad flex">
 
         <aside
-            class="border-2 rounded-[10px] pt-[50px] w-0 border-none bg-neutral-400 overflow-hidden flex flex-col gap-[30px] font-bold h-screen">
+            class="border-2 rounded-[10p] pt-[50px] w-0 border-none bg-neutral-400 overflow-hidden flex flex-col gap-[30px] font-bold h-screen">
             <button class="-translate-x-[80px]">
                 <p>Tasks</p>
             </button>
@@ -58,26 +58,19 @@
 
 
 
-
-            <!-- ADD TASK BUTTON -->
-            <div>
-                <button id="addTaskButton"
-                    class="flex justify-center items-center gap-[30px] fixed bottom-[50px] right-[50px] md:right-[100px] text-white text-[18px] md:text-[22px] bg-lime-500 h-[70px] w-[60px]  hover:w-[200px] rounded-full cursor-pointer group">
-                    <p class="hidden group-hover:flex">Add Task</p>
-                    <i class="fa-solid fa-pen"></i>
-                </button>
-            </div>
-
-
-
             <!-- TASKS CONTAINER -->
 
             <section id="taskSection" class="taskSection opacity-0 -translate-y-[1000px]">
 
-                <div class="padding">
-                    <button title="Go Back" id="goBackButton" class="cursor-pointer group">
-                        <i class="fa-solid fa-chevron-left text-[20px]"></i>
-                    </button>
+                <div class="padding flex items-center">
+                    <div class="">
+                        <button title="Go Back" id="goBackButton" class="cursor-pointer group">
+                            <i class="fa-solid fa-chevron-left text-[20px]"></i>
+                        </button>
+
+                    </div>
+
+                    <p class="w-fit m-auto text-[18px] md:text-[22px]">Tasks</p>
                 </div>
 
                 <!-- NO TASK ICON -->
@@ -85,9 +78,62 @@
                     <img src="MEDIA/EmptyTaskIcon.png" alt="" class="w-[30%] h-auto opacity-40 filter grayscale">
                     <p class="text-neutral-500">No Tasks yet</p>
                 </div>
+
+
+                <div>
+                    <!-- <p>hjavh</p> -->
+                </div>
             </section>
 
+            <!-- CREATE TASK BUTTON -->
+            <div>
+                <button id="createTaskButton"
+                    class="flex justify-center items-center gap-[30px] fixed bottom-[50px] right-[50px] md:right-[100px] text-white text-[18px] md:text-[22px] bg-lime-500 h-[70px] w-[70px]  hover:w-[200px] rounded-full cursor-pointer group">
+                    <p class="hidden group-hover:flex">Add Task</p>
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+            </div>
+
+
+            <!-- ADD TASK -->
+            <div id="addTaskModal" class="center p-[20px] py-[40px] opacity-0 hidden">
+                <div class="flex justify-end">
+                    <i title="Close" id="closeCreateTask"
+                        class="fa-solid fa-x text-[18px] text-red-500 text-[20px] font-bold cursor-pointer"></i>
+                </div> <br>
+                <p class="text-neutral-500 w-fit m-auto font-bold">Add a Task</p> <br>
+
+
+                <div class="flex flex-col gap-[5px]">
+                    <label for="">Enter Task Name</label>
+                    <input type="text" class="p-[10px] pr-[100px] md:pr-[200px]" placeholder="Task Name">
+                </div> <br>
+
+                <div class="flex flex-col gap-[5px]">
+                    <label for="">Set Task Date</label>
+                    <input type="date"  class="p-[10px] pr-[100px] md:pr-[200px] cursor-pointer" placeholder="Task Date">
+                </div><br>
+
+                <div class="flex flex-col gap-[5px]">
+                    <label for="">Set Task Time</label>
+                    <input type="time" class="p-[10px] pr-[100px] md:pr-[200px] cursor-pointer" placeholder="Task Time">
+                </div> <br>
+
+                <button id="addTaskButton"
+                    class="bg-[#84CC16] p-[10px] rounded-[20px] text-white font-bold cursor-pointer hover:scale-95">Add
+                    Task</button>
+
+                    <p id="successMessage" class="absolute top-[10px] left-[] opacity-0"></p>
+
+                    <p id="errorMessage" class="absolute top-[10px] left-[20px] opacity-0"></p>
+            </div>
+
         </section>
+
+
+
+        <!-- OVERLAY -->
+        <div id="overlay" class="hidden"></div>
     </main>
 
     <script src="script.js"></script>

@@ -1,4 +1,4 @@
-const addTaskButton = document.getElementById('addTaskButton')
+
 const seeTaskButton = document.getElementById('seeTaskButton')
 const taskSection = document.getElementById('taskSection')
 const gobackButton = document.getElementById('goBackButton')
@@ -6,6 +6,7 @@ const showMenuButton = document.getElementById('showMenuButton')
 
 
 
+// SEE TASKS
 
 seeTaskButton.addEventListener('click', () => {
     setTimeout(() => {
@@ -31,6 +32,8 @@ seeTaskButton.addEventListener('click', () => {
     // }, 600);
 })
 
+// BO BACK
+
 gobackButton.addEventListener('click', () => {
     taskSection.classList.add('opacity-0')
 
@@ -45,11 +48,14 @@ const asideAboutButton = asideMenu.querySelectorAll('button')[1]
 const asidePrivacyButton = asideMenu.querySelectorAll('button')[2]
 
 
+
+// SHOW ASIDE MENU
+
 showMenuButton.addEventListener('click', () => {
     const isMenuOpen = asideMenu.classList.contains('w-[150px]');
 
     if (isMenuOpen) {
-        
+
         setTimeout(() => {
             asidePrivacyButton.classList.add('-translate-x-[80px]');
         }, 200);
@@ -62,18 +68,18 @@ showMenuButton.addEventListener('click', () => {
             asideTasksButton.classList.add('-translate-x-[80px]');
         }, 400);
 
-      
+
         setTimeout(() => {
             asideMenu.classList.toggle('w-[150px]');
             // asideMenu.classList.toggle('border-none');
-        }, 500); 
+        }, 500);
 
     } else {
-        
+
         asideMenu.classList.toggle('w-[150px]');
         // asideMenu.classList.toggle('border-none');
 
-      
+
         setTimeout(() => {
             asideTasksButton.classList.remove('-translate-x-[80px]');
         }, 200);
@@ -89,3 +95,55 @@ showMenuButton.addEventListener('click', () => {
 });
 
 
+//TRIGGER CREATE TASK MODAL
+
+const createTaskButton = document.getElementById('createTaskButton')
+let createTaskModal = document.getElementById('addTaskModal')
+let closeCreateTaskButton = document.getElementById('closeCreateTask')
+let overlay = document.getElementById('overlay')
+
+function triggerCreateTaskModal() {
+    createTaskModal.classList.remove('hidden')
+
+    setTimeout(() => {
+        createTaskModal.classList.remove('opacity-0')
+        overlay.classList.remove('hidden')
+    }, 100);
+}
+
+function closeCreateTaskModal() {
+    createTaskModal.classList.add('opacity-0')
+    overlay.classList.add('hidden')
+
+    setTimeout(() => {
+        createTaskModal.classList.add('hidden')
+    }, 100);
+}
+
+createTaskButton.addEventListener('click', triggerCreateTaskModal)
+
+closeCreateTaskButton.addEventListener('click', closeCreateTaskModal)
+
+
+// ADD TASK
+
+let taskNameInput = createTaskModal.querySelectorAll('input')[0]
+let taskDateInput = createTaskModal.querySelectorAll('input')[1]
+let taskTimeInput = createTaskModal.querySelectorAll('input')[2]
+let addTaskButton = createTaskModal.querySelector('button')
+let successMessage = document.getElementById('successMessage')
+let errorMessage = document.getElementById('errorMessage')
+
+
+function addTask() {
+    if (!taskNameInput.value.trim()){
+        errorMessage.classList.remove('opacity-0')
+        errorMessage.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> All Fields Required'
+
+        setTimeout(() => {
+            errorMessage.classList.add('opacity-0')
+        }, 1000);
+    }
+}
+
+addTaskButton.addEventListener('click', addTask)
