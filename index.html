@@ -73,10 +73,15 @@
                     <p class="w-fit m-auto text-[18px] md:text-[22px]">Tasks</p>
                 </div>
 
-                <!-- NO TASK ICON -->
-                <div id="noTaskIcon" class="center w-fit flex flex-col items-center">
-                    <img src="MEDIA/EmptyTaskIcon.png" alt="" class="w-[30%] h-auto opacity-40 filter grayscale">
-                    <p class="text-neutral-500">No Tasks yet</p>
+
+                <!-- TASK INFO DIV -->
+                <div id="taskInfoDiv" class="p-[10px] flex flex-col gap-[15px]">
+
+                    <!-- NO TASK ICON -->
+                    <div id="noTaskIcon" class="center w-fit flex flex-col items-center">
+                        <img src="MEDIA/EmptyTaskIcon.png" alt="" class="w-[30%] h-auto opacity-40 filter grayscale">
+                        <p class="text-neutral-500">No Tasks yet</p>
+                    </div>
                 </div>
 
 
@@ -96,39 +101,42 @@
 
 
             <!-- ADD TASK -->
-            <div id="addTaskModal" class="center p-[7px] md:p-[20px] py-[20px] md:py-[40px] opacity-0 hidden">
+            <form action="" id="addTaskForm"
+                class="center flex flex-col gap-[20px] p-[7px] md:p-[20px]  py-[20px] md:py-[40px] opacity-0 hidden">
+
                 <div class="flex justify-end">
                     <i title="Close" id="closeCreateTask"
-                        class="fa-solid fa-x text-red-500 text-[30px] font-bold cursor-pointer"></i>
-                </div> <br>
-                <p class="text-neutral-500 w-fit m-auto font-bold">Add a Task</p> <br>
+                        class="fa-solid fa-x text-red-500 text-[25px] font-bold cursor-pointer"></i>
+                </div>
+                <p class="text-neutral-500 w-fit m-auto font-bold">Add a Task</p>
 
 
                 <div class="flex flex-col gap-[5px]">
-                    <label for="">Enter Task Name</label>
-                    <input type="text" class="p-[10px] pr-[100px] md:pr-[200px]" placeholder="Task Name">
-                </div> <br>
+                    <label for="taskname">Enter Task Name</label>
+                    <input type="text" id="taskname" class="p-[10px] pr-[100px] md:pr-[200px]" placeholder="Task Name">
+                </div>
 
                 <div class="flex flex-col gap-[5px]">
-                    <label for="">Set Task Date</label>
+                    <label for="taskdate">Set Task Date</label>
                     <!-- <input type="date"  class="p-[10px] pr-[100px] md:pr-[200px] cursor-pointer" placeholder="Task Date"> -->
-                    <input type="date" class="p-[10px]  cursor-pointer" placeholder="Task Date">
-                </div><br>
+                    <input type="date" id="taskdate" class="p-[10px]  cursor-pointer" placeholder="Task Date">
+                </div>
 
                 <div class="flex flex-col gap-[5px]">
-                    <label for="">Set Task Time</label>
+                    <label for="tasktime">Set Task Time</label>
                     <!-- <input type="time" class="p-[10px] pr-[100px] md:pr-[200px] cursor-pointer" placeholder="Task Time"> -->
-                    <input type="time" class="p-[10px]  cursor-pointer" placeholder="Task Time">
-                </div> <br>
+                    <input type="time" id="tasktime" class="p-[10px]  cursor-pointer" placeholder="Task Time">
+                </div>
 
                 <button id="addTaskButton"
                     class="bg-[#84CC16] p-[10px] rounded-[20px] text-white font-bold cursor-pointer hover:scale-95">Add
                     Task</button>
 
-                    <p id="successMessage" class="absolute top-[10px] left-[] opacity-0"></p>
+                <p id="successMessage" class="absolute top-[10px] left-[] opacity-0"></p>
 
-                    <p id="errorMessage" class="absolute top-[10px] left-[20px] opacity-0"></p>
-            </div>
+                <p id="errorMessage" class="absolute top-[10px] left-[20px] opacity-0"></p>
+
+            </form>
 
         </section>
 

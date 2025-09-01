@@ -43,23 +43,23 @@ aside button:hover {
 }
 
 
-#addTaskModal {
+#addTaskForm {
     display: flex;
     flex-flow: column;
     /* gap: 50px; */
-    box-shadow: 2px 2px 4px #84CC16, -2px -2px 4px #84CC16;
+    box-shadow: 1px 2px 2px #84CC16, -1px -1px 2px #84CC16;
     border-radius: 10px;
     z-index: 50;
     background-color: whitesmoke;
 }
 
-#addTaskModal input {
+#addTaskForm input {
     border: 1px solid #737373;
     border-radius: 5px;
     outline: none;
 }
 
-#addTaskModal input:focus {
+#addTaskForm input:focus {
     border: 1px solid #84CC16;
 }
 
@@ -90,4 +90,30 @@ aside button:hover {
     color: red;
     padding: 10px;
     font-weight: bold;
+}
+
+.taskInfo {
+    padding: 20px 4vw;
+    /* background-color: #84CC16; */
+    border-radius: 10px;
+    border: 2px solid #84CC16;
+    box-shadow: 1px 2px 2px #84CC16, -1px -1px 2px #84CC16;
+    display: flex;
+    /* gap: 50px; */
+    justify-content: space-between;
+}
+
+.taskInfo h1 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.taskInfo p {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.taskInfo button {
+    color: red;
+    font-size: 22px;
 }

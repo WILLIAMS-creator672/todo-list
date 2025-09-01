@@ -98,25 +98,25 @@ showMenuButton.addEventListener('click', () => {
 //TRIGGER CREATE TASK MODAL
 
 const createTaskButton = document.getElementById('createTaskButton')
-let createTaskModal = document.getElementById('addTaskModal')
+let createTaskForm = document.getElementById('addTaskForm')
 let closeCreateTaskButton = document.getElementById('closeCreateTask')
 let overlay = document.getElementById('overlay')
 
 function triggerCreateTaskModal() {
-    createTaskModal.classList.remove('hidden')
+    createTaskForm.classList.remove('hidden')
 
     setTimeout(() => {
-        createTaskModal.classList.remove('opacity-0')
+        createTaskForm.classList.remove('opacity-0')
         overlay.classList.remove('hidden')
     }, 100);
 }
 
 function closeCreateTaskModal() {
-    createTaskModal.classList.add('opacity-0')
+    createTaskForm.classList.add('opacity-0')
     overlay.classList.add('hidden')
 
     setTimeout(() => {
-        createTaskModal.classList.add('hidden')
+        createTaskForm.classList.add('hidden')
     }, 100);
 }
 
@@ -127,23 +127,115 @@ closeCreateTaskButton.addEventListener('click', closeCreateTaskModal)
 
 // ADD TASK
 
-let taskNameInput = createTaskModal.querySelectorAll('input')[0]
-let taskDateInput = createTaskModal.querySelectorAll('input')[1]
-let taskTimeInput = createTaskModal.querySelectorAll('input')[2]
-let addTaskButton = createTaskModal.querySelector('button')
-let successMessage = document.getElementById('successMessage')
-let errorMessage = document.getElementById('errorMessage')
+let taskNameInput = createTaskForm.querySelectorAll('input')[0];
+let taskDateInput = createTaskForm.querySelectorAll('input')[1];
+let taskTimeInput = createTaskForm.querySelectorAll('input')[2];
+let addTaskButton = createTaskForm.querySelector('button');
+let successMessage = document.getElementById('successMessage');
+let errorMessage = document.getElementById('errorMessage');
 
+// DISPLAY TASK INFO
+let taskInfoDiv = document.getElementById('taskInfoDiv');
 
-function addTask() {
-    if (!taskNameInput.value.trim()){
-        errorMessage.classList.remove('opacity-0')
-        errorMessage.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> All Fields Required'
+let tasks = [];
 
-        setTimeout(() => {
-            errorMessage.classList.add('opacity-0')
-        }, 1000);
-    }
+// RETRIEVE TASKS
+const storedTasks = localStorage.getItem('tasks');
+if (storedTasks) {
+    tasks = JSON.parse(storedTasks);
+    displayTasks();
 }
 
-addTaskButton.addEventListener('click', addTask)
+// DELETE TASK
+function deleteTask(taskId) {
+    
+    tasks = tasks.filter(task => task.id != taskId);
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+    
+    displayTasks();
+
+ 
+    successMessage.classList.remove('opacity-0');
+    successMessage.innerHTML = '<i class="fa-solid fa-circle-check"></i> Task Deleted';
+    setTimeout(() => {
+        successMessage.classList.add('opacity-0');
+    }, 2000);
+}
+
+function addTask(event) {
+    event.preventDefault();
+
+    function errors() {
+        errorMessage.classList.remove('opacity-0');
+        errorMessage.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> All Fields Required';
+
+        setTimeout(() => {
+            errorMessage.classList.add('opacity-0');
+        }, 1000);
+    }
+
+    if (!taskNameInput.value.trim() || taskDateInput.value === '' || taskTimeInput.value === '') {
+        errors();
+        return;
+    }
+
+    let taskName = taskNameInput.value.trim();
+    let taskDate = taskDateInput.value;
+    let taskTime = taskTimeInput.value;
+
+    const newTask = {
+        id: Date.now(),
+        taskName,
+        taskDate,
+        taskTime,
+        completed: false
+    };
+
+    tasks.push(newTask);
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+    displayTasks();
+
+    successMessage.classList.remove('opacity-0');
+    successMessage.innerHTML = '<i class="fa-solid fa-circle-check"></i> Task Added';
+    setTimeout(() => {
+        successMessage.classList.add('opacity-0');
+    }, 2000);
+
+    taskNameInput.value = '';
+    taskDateInput.value = '';
+    taskTimeInput.value = '';
+}
+
+function displayTasks() {
+    taskInfoDiv.innerHTML = '';
+
+    tasks.forEach(task => {
+        const taskDiv = document.createElement('div');
+        taskDiv.classList.add('taskInfo');
+
+        const taskInfo = document.createElement('div');
+        taskInfo.innerHTML = `
+            <h1>${task.taskName}</h1>
+            <p>${task.taskDate} at ${task.taskTime}</p>
+        `;
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        deleteBtn.dataset.taskId = task.id;
+
+      
+        deleteBtn.addEventListener('click', () => {
+            deleteTask(task.id);
+        });
+
+        taskDiv.appendChild(taskInfo);
+        taskDiv.appendChild(deleteBtn);
+        taskInfoDiv.appendChild(taskDiv);
+    });
+}
+
+createTaskForm.addEventListener('submit', addTask);
