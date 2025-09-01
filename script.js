@@ -224,7 +224,7 @@ function displayTasks() {
         `;
 
         const deleteBtn = document.createElement('button');
-        deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        deleteBtn.innerHTML = '<i class="fa-solid fa-trash cursor-pointer"></i>';
         deleteBtn.dataset.taskId = task.id;
 
       
