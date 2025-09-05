@@ -3,12 +3,13 @@ const seeTaskButton = document.getElementById('seeTaskButton')
 const taskSection = document.getElementById('taskSection')
 const gobackButton = document.getElementById('goBackButton')
 const showMenuButton = document.getElementById('showMenuButton')
+const asideTaskButton = document.getElementById('asideTask')
 
 
 
 // SEE TASKS
 
-seeTaskButton.addEventListener('click', () => {
+function seeTasks() {
     setTimeout(() => {
 
         taskSection.classList.remove('-translate-y-[1000px]')
@@ -27,10 +28,12 @@ seeTaskButton.addEventListener('click', () => {
         taskSection.classList.remove('translate-y-[300px]')
     }, 350);
 
-    // setTimeout(() => {
-    //     taskSection.classList.remove('animate-bounce')
-    // }, 600);
-})
+}
+
+seeTaskButton.addEventListener('click', seeTasks)
+asideTaskButton.addEventListener('click', seeTasks)
+
+
 
 // BO BACK
 
@@ -133,6 +136,7 @@ let taskTimeInput = createTaskForm.querySelectorAll('input')[2];
 let addTaskButton = createTaskForm.querySelector('button');
 let successMessage = document.getElementById('successMessage');
 let errorMessage = document.getElementById('errorMessage');
+let deleteSuccessMsg = document.getElementById('deleteSuccess')
 
 // DISPLAY TASK INFO
 let taskInfoDiv = document.getElementById('taskInfoDiv');
@@ -148,19 +152,20 @@ if (storedTasks) {
 
 // DELETE TASK
 function deleteTask(taskId) {
-    
+
     tasks = tasks.filter(task => task.id != taskId);
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
 
-    
+
     displayTasks();
 
- 
-    successMessage.classList.remove('opacity-0');
-    successMessage.innerHTML = '<i class="fa-solid fa-circle-check"></i> Task Deleted';
+
+    deleteSuccessMsg.classList.remove('opacity-0');
+    deleteSuccessMsg.innerHTML = '<i class="fa-solid fa-circle-check"></i> Task Deleted';
+
     setTimeout(() => {
-        successMessage.classList.add('opacity-0');
+        deleteSuccessMsg.classList.add('opacity-0');
     }, 2000);
 }
 
@@ -173,7 +178,7 @@ function addTask(event) {
 
         setTimeout(() => {
             errorMessage.classList.add('opacity-0');
-        }, 1000);
+        }, 2000);
     }
 
     if (!taskNameInput.value.trim() || taskDateInput.value === '' || taskTimeInput.value === '') {
@@ -205,10 +210,18 @@ function addTask(event) {
         successMessage.classList.add('opacity-0');
     }, 2000);
 
-    taskNameInput.value = '';
-    taskDateInput.value = '';
-    taskTimeInput.value = '';
+   setTimeout(() => {
+       taskNameInput.value = '';
+       taskDateInput.value = '';
+       taskTimeInput.value = '';
+   }, 2200);
 }
+
+// let noTaskIcon = document.getElementById('noTaskIcon')
+
+// console.log(noTaskIcon);
+
+
 
 function displayTasks() {
     taskInfoDiv.innerHTML = '';
@@ -227,7 +240,7 @@ function displayTasks() {
         deleteBtn.innerHTML = '<i class="fa-solid fa-trash cursor-pointer"></i>';
         deleteBtn.dataset.taskId = task.id;
 
-      
+
         deleteBtn.addEventListener('click', () => {
             deleteTask(task.id);
         });
@@ -236,6 +249,17 @@ function displayTasks() {
         taskDiv.appendChild(deleteBtn);
         taskInfoDiv.appendChild(taskDiv);
     });
+
+    if (tasks.length == 0) {
+        taskInfoDiv.innerHTML = `<div id="noTaskIcon" class="center w-fit flex flex-col items-center">
+            <img src="MEDIA/EmptyTaskIcon.png" alt="" class="w-[30%] h-auto opacity-40 filter grayscale">
+            <p class="text-neutral-500">No Tasks yet</p>
+             </div>`
+    }
 }
+
+
+
+
 
 createTaskForm.addEventListener('submit', addTask);

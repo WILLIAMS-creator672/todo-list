@@ -1,5 +1,6 @@
 * {
     transition: all 0.3s;
+    font-family: Lora;
 }
 
 .padding {
@@ -47,7 +48,7 @@ aside button:hover {
     display: flex;
     flex-flow: column;
     /* gap: 50px; */
-    box-shadow: 1px 2px 2px #84CC16, -1px -1px 2px #84CC16;
+    box-shadow: 1px 1px 1px #84CC16, -1px -1px 1px #84CC16;
     border-radius: 10px;
     z-index: 50;
     background-color: whitesmoke;
@@ -81,6 +82,7 @@ aside button:hover {
     color: #84CC16;
     padding: 10px;
     font-weight: bold;
+    z-index: 100;
 }
 
 #errorMessage {
@@ -90,6 +92,21 @@ aside button:hover {
     color: red;
     padding: 10px;
     font-weight: bold;
+    z-index: 100;
+}
+
+#deleteSuccess {
+    box-shadow: 2px 2px 4px #84CC16, -2px -2px 4px #84CC16;
+    width: fit-content;
+    border-radius: 10px;
+    color: #84CC16;
+    padding: 10px;
+    font-weight: bold;
+    z-index: 100;
+    position: fixed;
+    left: 30px;
+    bottom: 30px;
+    background-color: white;
 }
 
 .taskInfo {
